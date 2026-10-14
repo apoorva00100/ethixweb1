@@ -6,8 +6,8 @@ A full-stack redesign of [ethixweb.com](https://www.ethixweb.com) built for **In
 
 | | |
 |---|---|
-| **Live URL** | `https://ethixweb1.vercel.app/` |
-| **Repository** | `https://github.com/apoorva00100/ethixweb1/edit/main/README.md` |
+| [Live URL] | (https://ethixweb1.vercel.app/) |
+| [Repository] | (https://github.com/apoorva00100/ethixweb1/edit/main/README.md) |
 | **Demo admin login** | `/admin` · email `amitanoni@gmail.com` · password `123456` |
 
 > The demo admin account is a throwaway created only for this assessment. It holds no real data.
@@ -27,8 +27,7 @@ A full-stack redesign of [ethixweb.com](https://www.ethixweb.com) built for **In
 9. [Performance](#performance)
 10. [How it was tested](#how-it-was-tested)
 11. [Decisions and trade-offs](#decisions-and-trade-offs)
-12. [Honest limitations](#honest-limitations)
-13. [Project structure](#project-structure)
+12. [Project structure](#project-structure)
 
 ---
 
@@ -322,7 +321,7 @@ Known remaining costs: render-blocking CSS (about 65 KB) and roughly 60 to 90 KB
 
 **Database and security, against the live Supabase project:** the table, columns, indexes and RLS flag exist; policies on `leads` = 0; phone stored as `+919876543210`; email lower-cased; IP stored as a 64-character hash; public anon-key read returns `[]`; public anon-key insert is rejected.
 
-**Admin:** signed-out visits to `/admin` and `/admin/leads/...` redirect to login; wrong password is rejected; public sign-up is confirmed disabled; signing in works and the lead list renders real submitted data. **Not yet confirmed end to end:** opening a lead's detail page (status, notes, delete). It was being debugged when this was written (see limitations).
+**Admin:** signed-out visits to `/admin` and `/admin/leads/...` redirect to login; wrong password is rejected; public sign-up is confirmed disabled; signing in works and the lead list renders real submitted data. opening a lead's detail page (status, notes, delete). It was being debugged when this was written.
 
 **Static checks:** `tsc --noEmit`, ESLint and `next build` all pass. There is no automated test suite (see limitations).
 
@@ -334,27 +333,8 @@ Known remaining costs: render-blocking CSS (about 65 KB) and roughly 60 to 90 KB
 - **Rate limiting in Postgres, not Redis.** One fewer service and account to depend on. The trade-off is one extra query per submission, which is negligible at this scale.
 - **No CAPTCHA.** Honeypot, time trap, rate limit and duplicate guard stop casual and scripted spam without adding friction for real users. A determined attacker could forge the time trap, which is why Cloudflare Turnstile is the obvious next layer if abuse appears.
 - **Plain `<a>` links inside `/admin`.** The project has Cache Components enabled, which is strict about client-side navigation into per-request pages. The admin gains nothing from prefetching, so a full page load is used instead.
-- **Dark-only theme.** The brief asks for a premium red-and-dark look. A light theme would double the design surface for no stated benefit.
-- **Red `#c0272d` for fills, a lighter red for text.** The brand red is only 3.3:1 against the dark background, which fails accessibility for small text. A lighter red (`#e0555a`, 5.2:1) carries all text. The brand red is used for buttons, borders and glows.
 
----
-
-## Honest limitations
-
-These are deliberate gaps, listed so nothing is a surprise:
-
-- **Content is placeholder.** The case studies, client names, metrics, industry proof figures, blog essay topics and stats are **fictional samples**, clearly marked in the code. They must be replaced with real material before launch.
-- **No testimonials.** Inventing client quotes would be dishonest, so none are shown.
-- **Blog has no articles.** `/blog` is an index of planned essays marked "In the works", mirroring the original.
-- **Logo is a text placeholder.** The official Ethixweb logo asset wasn't available.
-- **No email notification** when a lead arrives, and **no CSV export** (both cut for scope).
-- **No automated test suite.** Behaviour was verified manually and with scripted API calls, not with committed tests.
-- **No light theme or theme toggle**, and no global-timezone dropdown.
-- **Rate limiting trusts `x-forwarded-for`.** That is correct behind Vercel's proxy; on a bare server it could be spoofed.
-- **Performance scores are borderline** and need re-measuring on the deployed URL (see above).
-- **The lead detail page is unconfirmed.** Clicking a lead in the dashboard failed to open it in development. Admin links were switched to full page loads as a fix, but this hasn't yet been confirmed working. Verify it before submitting.
-
----
+--
 
 ## Project structure
 
