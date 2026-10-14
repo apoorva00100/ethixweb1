@@ -6,10 +6,9 @@ A full-stack redesign of [ethixweb.com](https://www.ethixweb.com) built for **In
 
 | | |
 |---|---|
-| **Live URL** | `<add Vercel URL>` |
-| **Repository** | `<add GitHub URL>` |
-| **Walkthrough video** | `<add link>` |
-| **Demo admin login** | `/admin/login` · email `<demo admin email>` · password `<demo password>` |
+| **Live URL** | `https://ethixweb1.vercel.app/` |
+| **Repository** | `https://github.com/apoorva00100/ethixweb1/edit/main/README.md` |
+| **Demo admin login** | `/admin` · email `amitanoni@gmail.com` · password `123456` |
 
 > The demo admin account is a throwaway created only for this assessment. It holds no real data.
 
